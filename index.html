@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Page Title</title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			// Your JavaScript goes here!
+      function computerPlay() {
+        // Generates a random number between 0 and 2
+        // Translates the generated number to rock, paper, or scissors
+        let rps = Math.floor(Math.random() * 3)
+        if (rps == 0) {
+          rpsString = 'Rock'
+        } else if (rps == 1) {
+          rpsString = 'Paper'
+        } else {
+          rpsString = 'Scissors'
+        }
+        return rpsString.toLowerCase()
+      }
+
+    function playerInput() {
+      // Get player input and verify that valid choice is entered
+		  let playerSelection = prompt("Please enter Rock, Paper, or Scissors");
+      let playerLowerCase = playerSelection.toLowerCase()
+		  if ((playerLowerCase === "rock") || (playerLowerCase === "paper") || (playerLowerCase === "scissors")) {
+		    return playerLowerCase
+		  } else {
+		    console.log("Please enter a valid input.")
+		    exit();
+      }
+    }
+
+      function playRound(x, y) {
+
+        switch (x) {
+
+          // player plays rock
+          case ('rock'):
+            switch (y) {
+              // computer plays rock
+              case ('rock'):
+                return 'Draw. Both sides played Rock.';
+                break;
+              // computer plays paper
+              case ('paper'):
+                playerLose++;
+                return 'You Lose! Paper beats Rock.';
+                break;
+              // computer plays scissors
+              case ('scissors'):
+                playerWin++;
+                return 'You Win! Rock beats Scissors.';
+                break;
+            }
+
+          // player plays paper
+          case ('paper'):
+            switch (y) {
+              // computer plays rock
+              case ('rock'):
+                playerWin++;
+                return 'You Win! Paper beats Rock.';
+                break;
+              // computer plays paper
+              case ('paper'):
+                return 'Draw. Both sides played Paper.';
+                break;
+              // computer plays scissors
+              case ('scissors'):
+                playerLose++;
+                return 'You Lose! Scissors beats Paper.';
+                break;
+            }
+
+          // player plays scissors
+          case ('scissors'):
+            switch (y) {
+              // computer plays rock
+              case ('rock'):
+                playerLose++;
+                return 'You Lose! Rock beats Scissors.';
+                break;
+              // computer plays paper
+              case ('paper'):
+                playerWin++;
+                return 'You Win! Paper beats Scissors.';
+                break;
+              // computer plays scissors
+              case ('scissors'):
+                return 'Draw! Both sides played Scissors.';
+                break;
+            }
+        }
+      }
+
+      function game() {
+        let turns = 1
+        while (turns <= 5) {
+          let playerSelection = playerInput()
+          let computerSelection = computerPlay()
+          console.log('Player: ', playerSelection, ' | Computer: ', computerSelection);
+          console.log(playRound(playerSelection, computerSelection));
+          console.log('Player Wins: ', playerWin, ' | Player Losses: ', playerLose);
+          turns++
+        }
+
+        if (playerWin > playerLose) {
+          let finalResult = 'You won the game.'
+          console.log(finalResult)
+        } else if (playerWin < playerLose) {
+          let finalResult = 'You lost the game.'
+          console.log(finalResult)
+        } else {
+          let finalResult = 'The game ended in a tie.'
+          console.log(finalResult)
+        }
+      }
+
+      let playerWin = 0
+      let playerLose = 0
+      game()
+
+		</script>
+	</body>
+</html>
